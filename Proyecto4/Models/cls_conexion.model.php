@@ -9,7 +9,7 @@ class Clase_Conectar_Base_Datos
     /**
      * XAMPP  password = '';
      */
-    private $dbname = "Sexto";
+    private $dbname = "sexto";
 
     public function ProcedimientoConectar()
     {

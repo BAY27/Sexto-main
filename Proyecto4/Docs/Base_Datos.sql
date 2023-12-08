@@ -1,38 +1,53 @@
-
 --
--- Base de datos: `Sexto`
+-- Base de datos: `sexto`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Pais`
+-- Estructura de tabla para la tabla `pais`
 --
 
-CREATE TABLE `Pais` (
+CREATE TABLE `pais` (
   `PaisId` int(11) NOT NULL,
   `Nombre` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `pais`
+--
+
+INSERT INTO `pais` (`PaisId`, `Nombre`) VALUES
+(1, 'Ecuador'),
+(2, 'Peru'),
+(3, 'Colombia');
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Provincias`
+-- Estructura de tabla para la tabla `provincias`
 --
 
-CREATE TABLE `Provincias` (
+CREATE TABLE `provincias` (
   `ProvinciasId` int(11) NOT NULL,
   `Nombre` text NOT NULL,
-  `PaisesId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `PaisesId` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Volcado de datos para la tabla `provincias`
+--
+
+INSERT INTO `provincias` (`ProvinciasId`, `Nombre`, `PaisesId`) VALUES
+(1, 'Pichincha', 1);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `Usuarios`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
-CREATE TABLE `Usuarios` (
+CREATE TABLE `usuarios` (
   `UsuarioId` int(11) NOT NULL,
   `Cedula` varchar(17) NOT NULL,
   `Nombres` varchar(100) NOT NULL,
@@ -41,38 +56,38 @@ CREATE TABLE `Usuarios` (
   `Correo` varchar(150) NOT NULL,
   `Contrasenia` text NOT NULL,
   `Rol` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Volcado de datos para la tabla `Usuarios`
+-- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `Usuarios` (`UsuarioId`, `Cedula`, `Nombres`, `Apellidos`, `Telefono`, `Correo`, `Contrasenia`, `Rol`) VALUES
-(1, '1803971371', 'Luis Antonio', 'Llerena Ocaña', '0987654321', 'lleroc1@gmail.com', '123', 'Administrador'),
-(2, '1234567890', 'Otro Luis', 'Otro Llerena', '0987654321', 'correo@gmail.com', '123', 'Vendedor'),
-(4, '1803971330', 'Luis Antonio', 'Llerena Ocaña', '0981030167', 'lleroc@gmail.com', '123', 'Administrador');
+INSERT INTO `usuarios` (`UsuarioId`, `Cedula`, `Nombres`, `Apellidos`, `Telefono`, `Correo`, `Contrasenia`, `Rol`) VALUES
+(1, '1719934331', 'Byron Alexis', 'Jimenez Jimenez', '0961238616', 'byronjimenez55@gmail.com', '123', 'Administrador'),
+(2, '1234567890', 'Bay Dos', 'Vende Jimenez', '0987654321', 'correo@gmail.com', '123', 'Vendedor'),
+(4, '1102120407', 'Efren Tuesman', 'Jimenez Alvarez', '0998750246', 'efrenjimenz@gmail.com', '123', 'Administrador');
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `Pais`
+-- Indices de la tabla `pais`
 --
-ALTER TABLE `Pais`
+ALTER TABLE `pais`
   ADD PRIMARY KEY (`PaisId`);
 
 --
--- Indices de la tabla `Provincias`
+-- Indices de la tabla `provincias`
 --
-ALTER TABLE `Provincias`
+ALTER TABLE `provincias`
   ADD PRIMARY KEY (`ProvinciasId`),
   ADD KEY `Pais_Provincia` (`PaisesId`);
 
 --
--- Indices de la tabla `Usuarios`
+-- Indices de la tabla `usuarios`
 --
-ALTER TABLE `Usuarios`
+ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`UsuarioId`);
 
 --
@@ -80,21 +95,21 @@ ALTER TABLE `Usuarios`
 --
 
 --
--- AUTO_INCREMENT de la tabla `Pais`
+-- AUTO_INCREMENT de la tabla `pais`
 --
-ALTER TABLE `Pais`
-  MODIFY `PaisId` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `pais`
+  MODIFY `PaisId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT de la tabla `Provincias`
+-- AUTO_INCREMENT de la tabla `provincias`
 --
-ALTER TABLE `Provincias`
-  MODIFY `ProvinciasId` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `provincias`
+  MODIFY `ProvinciasId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT de la tabla `Usuarios`
+-- AUTO_INCREMENT de la tabla `usuarios`
 --
-ALTER TABLE `Usuarios`
+ALTER TABLE `usuarios`
   MODIFY `UsuarioId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
@@ -102,8 +117,8 @@ ALTER TABLE `Usuarios`
 --
 
 --
--- Filtros para la tabla `Provincias`
+-- Filtros para la tabla `provincias`
 --
-ALTER TABLE `Provincias`
-  ADD CONSTRAINT `Pais_Provincia` FOREIGN KEY (`PaisesId`) REFERENCES `Pais` (`PaisId`);
+ALTER TABLE `provincias`
+  ADD CONSTRAINT `Pais_Provincia` FOREIGN KEY (`PaisesId`) REFERENCES `pais` (`PaisId`);
 COMMIT;
