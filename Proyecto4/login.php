@@ -32,6 +32,7 @@
                           <div class="alert alert-danger">
                             Por favor ingrese sus datos
                           </div>
+                          
                         </div>
 
                       <?php
