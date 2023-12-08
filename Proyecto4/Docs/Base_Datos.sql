@@ -1,6 +1,29 @@
---
+-
 -- Base de datos: `sexto`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `computadoras`
+--
+
+CREATE TABLE `computadoras` (
+  `computadoraId` int(11) NOT NULL,
+  `tipocomputadora` varchar(55) NOT NULL,
+  `modelo` varchar(55) NOT NULL,
+  `nserie` varchar(55) NOT NULL,
+  `marca` varchar(55) NOT NULL,
+  `precio` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `computadoras`
+--
+
+INSERT INTO `computadoras` (`computadoraId`, `tipocomputadora`, `modelo`, `nserie`, `marca`, `precio`) VALUES
+(1, 'LAPTO', 'X12', 'HJKHJ8989', 'HP', '1000.00'),
+(2, 'ESCRITORIO', 'DELL10120', 'JHII898798', 'DELL', '800.00');
 
 -- --------------------------------------------------------
 
@@ -72,6 +95,12 @@ INSERT INTO `usuarios` (`UsuarioId`, `Cedula`, `Nombres`, `Apellidos`, `Telefono
 --
 
 --
+-- Indices de la tabla `computadoras`
+--
+ALTER TABLE `computadoras`
+  ADD PRIMARY KEY (`computadoraId`);
+
+--
 -- Indices de la tabla `pais`
 --
 ALTER TABLE `pais`
@@ -93,6 +122,12 @@ ALTER TABLE `usuarios`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `computadoras`
+--
+ALTER TABLE `computadoras`
+  MODIFY `computadoraId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `pais`
