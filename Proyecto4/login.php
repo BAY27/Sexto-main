@@ -22,7 +22,7 @@
                   <!-- <img src="Public/assets/images/logos/dark-logo.svg" width="180" alt="">-->
                 </a>
                 <p class="text-center">Ingrese sus datos</p>
-                <form action="controllers/usuario.controller.php?op=login" method="post">
+                <form action="controllers/usuarios.controller.php?op=login" method="post">
                   <?php
                   if (isset($_GET["op"])) {
                     switch ($_GET["op"]) {

@@ -18,30 +18,30 @@ switch ($_GET["op"]) {
         echo json_encode($uno); //devuelvo el arreglo en formato json
         break;
     case 'insertar':
-        $Cedula = $_POST["Cedula"];
+        $cedula = $_POST["cedula"];
         $Nombres = $_POST["Nombres"];
         $Apellidos = $_POST["Apellidos"];
         $Telefono = $_POST["Telefono"];
-        $Contrasenia = $_POST["Contrasenia"];
-        $Correo = $_POST["Correo"];
+        $contrasenia = $_POST["contrasenia"];
+        $correo = $_POST["correo"];
         $Rol = $_POST["Rol"];
 
         $datos = array(); //defino un arreglo
-        $datos = $usuarios->insertar($Cedula, $Nombres, $Apellidos, $Telefono, $Correo, $Contrasenia,  $Rol); //llamo al modelo de usuarios e invoco al procedimiento insertar
+        $datos = $usuarios->insertar($cedula, $Nombres, $Apellidos, $Telefono, $correo, $contrasenia,  $Rol); //llamo al modelo de usuarios e invoco al procedimiento insertar
         echo json_encode($datos); //devuelvo el arreglo en formato json
         break;
     case 'actualizar':
         $UsuarioId = $_POST["UsuarioId"];
-        $Cedula = $_POST["Cedula"];
+        $cedula = $_POST["cedula"];
         $Nombres = $_POST["Nombres"];
         $Apellidos = $_POST["Apellidos"];
         $Telefono = $_POST["Telefono"];
-        $Contrasenia = $_POST["Contrasenia"];
-        $Correo = $_POST["Correo"];
+        $contrasenia = $_POST["contrasenia"];
+        $correo = $_POST["correo"];
         $Rol = $_POST["Rol"];
 
         $datos = array(); //defino un arreglo
-        $datos = $usuarios->actualizar($UsuarioId, $Cedula, $Nombres, $Apellidos, $Telefono, $Contrasenia, $Correo, $Rol); //llamo al modelo de usuarios e invoco al procedimiento actual
+        $datos = $usuarios->actualizar($UsuarioId, $cedula, $Nombres, $Apellidos, $Telefono, $contrasenia, $correo, $Rol); //llamo al modelo de usuarios e invoco al procedimiento actual
         echo json_encode($datos); //devuelvo el arreglo en formato json
         break;
     case 'eliminar':
@@ -52,9 +52,9 @@ switch ($_GET["op"]) {
         break;
     case 'actualizar_contrasenia':
         $UsuarioId = $_POST["UsuarioId"];
-        $Contrasenia = $_POST["Contrasenia"];
+        $contrasenia = $_POST["contrasenia"];
         $datos = array(); //defino un arreglo
-        $datos = $usuarios->actualizar_contrasenia($UsuarioId, $Contrasenia); //llamo al modelo de usuarios e invoco al procedimiento actual
+        $datos = $usuarios->actualizar_contrasenia($UsuarioId, $contrasenia); //llamo al modelo de usuarios e invoco al procedimiento actual
         echo json_encode($datos);
         break;
     case 'login':
@@ -72,10 +72,10 @@ switch ($_GET["op"]) {
                 //poner variables de session controlar accessos
                 //$respuesta -> trae toda la información del usuario
                 session_start();
-                if ($contrasenia == $respuesta["Contrasenia"]) {  //comparar la contraseña de la base con la contraseña que ingreso el usuario
+                if ($contrasenia == $respuesta["contrasenia"]) {  //comparar la contraseña de la base con la contraseña que ingreso el usuario
                     $_SESSION['Nombres']  = $respuesta["Nombres"];
                     $_SESSION['Apellidos'] = $respuesta["Apellidos"];
-                    $_SESSION['Correo']    = $respuesta["Correo"];
+                    $_SESSION['correo']    = $respuesta["correo"];
                     $_SESSION['Rol']       = $respuesta["Rol"];
                     $_SESSION['UsuarioId'] = $respuesta["UsuarioId"];
                     header("Location:../views/index.php");
@@ -93,16 +93,16 @@ switch ($_GET["op"]) {
         }
         break;
     case "cedula_repetida":
-        $Cedula = $_POST["Cedula"];
+        $cedula = $_POST["cedula"];
         $datos = array(); //defino un arreglo
-        $datos = $usuarios->cedula_repetida($Cedula); //llamo al modelo de usuarios e invoco al procedimiento uno y almaceno en una variable
+        $datos = $usuarios->cedula_repetida($cedula); //llamo al modelo de usuarios e invoco al procedimiento uno y almaceno en una variable
         $uno = mysqli_fetch_assoc($datos); //recorro el arreglo de datos
         echo json_encode($uno); //devuelvo el arreglo en formato json
         break;
     case "verifica_correo":
-        $Correo = $_POST["Correo"];
+        $correo = $_POST["correo"];
         $datos = array(); //defino un arreglo
-        $datos = $usuarios->verifica_correo($Correo); //llamo al modelo de usuarios e invoco al procedimiento uno y almaceno en una variable
+        $datos = $usuarios->verifica_correo($correo); //llamo al modelo de usuarios e invoco al procedimiento uno y almaceno en una variable
         $uno = mysqli_fetch_assoc($datos); //recorro el arreglo de datos
         echo json_encode($uno); //devuelvo el arreglo en formato json
         break;

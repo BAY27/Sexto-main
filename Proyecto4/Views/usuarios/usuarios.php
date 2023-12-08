@@ -62,7 +62,7 @@
 
                     <div class="form-group">
                         <label for="Cédula">Cédula</label>
-                        <input type="text" onfocusout="algoritmo_cedula();cedula_repetida();" required class="form-control" id="Cedula" name="Cedula" placeholder="Cédula">
+                        <input type="text" onfocusout="algoritmo_cedula();cedula_repetida();" required class="form-control" id="cedula" name="cedula" placeholder="cedula">
                         <div class="alert alert-danger d-none" role="alert" id="errorCedula">
                         </div>
                         <div class="alert alert-danger d-none" role="alert" id="CedulaRepetida">
@@ -91,20 +91,20 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="Correo">Correo</label>
-                        <input type="text" required onfocusout="verifica_correo()" class="form-control" id="Correo" name="Correo" placeholder="Correo">
+                        <label for="correo">Correo</label>
+                        <input type="text" required onfocusout="verifica_correo()" class="form-control" id="correo" name="correo" placeholder="correo">
                         <div class="alert alert-danger d-none" role="alert" id="CorreoRepetido">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="Contrasenia">Contraseña</label>
-                        <input type="password" required onfocusout="verifica_contrasenias()" class="form-control" id="Contrasenia" name="Contrasenia" placeholder="Contrasenia">
+                        <label for="contrasenia">Contraseña</label>
+                        <input type="password" required onfocusout="verifica_contrasenias()" class="form-control" id="contrasenia" name="contrasenia" placeholder="contrasenia">
                         <div class="alert alert-danger d-none" role="alert" id="errorContrasenia">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="nombre">Repita su contraseña</label>
-                        <input type="password" required class="form-control" onfocusout="verifica_contrasenias()"  id="Contrasenia2" placeholder="Contrasenia2">
+                        <input type="password" required class="form-control" onfocusout="verifica_contrasenias()"  id="contrasenia2" placeholder="contrasenia2">
                         <div class="alert alert-danger d-none" role="alert" id="errorContrasenia">
                         </div>
                     </div>

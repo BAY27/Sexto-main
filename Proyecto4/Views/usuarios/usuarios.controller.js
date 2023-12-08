@@ -134,8 +134,8 @@ var verifica_correo = () => {
 };
 
 var verifica_contrasenias = () => {
-  var contrasenia = $("#Contrasenia").val();
-  var contrasenia2 = $("#Contrasenia2").val();
+  var contrasenia = $("#contrasenia").val();
+  var contrasenia2 = $("#contrasenia2").val();
   if (contrasenia == contrasenia2) {
     $("#errorcontrasenia").addClass("d-none");
     $("button").prop("disabled", false);
