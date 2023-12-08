@@ -118,14 +118,14 @@ var cedula_repetida = () => {
   usuarios.cedula_repetida();
 };
 var verifica_correo = () => {
-  var Correo = $("#Correo").val();
+  var correo = $("#correo").val();
   var usuarios = new Usuarios_Model(
     "",
     "",
     "",
     "",
     "",
-    Correo,
+    correo,
     "",
     "",
     "verifica_correo"
@@ -134,14 +134,14 @@ var verifica_correo = () => {
 };
 
 var verifica_contrasenias = () => {
-  var Contrasenia = $("#Contrasenia").val();
-  var Contrasenia2 = $("#Contrasenia2").val();
-  if (Contrasenia == Contrasenia2) {
-    $("#errorContrasenia").addClass("d-none");
+  var contrasenia = $("#Contrasenia").val();
+  var contrasenia2 = $("#Contrasenia2").val();
+  if (contrasenia == contrasenia2) {
+    $("#errorcontrasenia").addClass("d-none");
     $("button").prop("disabled", false);
   } else {
-    $("#errorContrasenia").removeClass("d-none");
-    $("#errorContrasenia").html("Las contraseñas no coinciden");
+    $("#errorcontrasenia").removeClass("d-none");
+    $("#errorcontrasenia").html("Las contraseñas no coinciden");
     $("button").prop("disabled", true);
   }
 };

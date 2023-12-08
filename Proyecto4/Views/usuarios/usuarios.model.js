@@ -1,28 +1,28 @@
 class Usuarios_Model {
   constructor(
     UsuarioId,
-    Cedula,
+    cedula,
     Nombres,
     Apellidos,
     Telefono,
-    Correo,
-    Contrasenia,
+    correo,
+    contrasenia,
     Rol,
     Ruta
   ) {
     this.UsuarioId = UsuarioId;
-    this.Cedula = Cedula;
+    this.cedula = cedula;
     this.Nombres = Nombres;
     this.Apellidos = Apellidos;
     this.Telefono = Telefono;
-    this.Correo = Correo;
-    this.Contrasenia = Contrasenia;
+    this.correo = correo;
+    this.contrasenia = contrasenia;
     this.Rol = Rol;
     this.Ruta = Ruta;
   }
   todos() {
     var html = "";
-    $.get("../../Controllers/usuario.controller.php?op=" + this.Ruta, (res) => {
+    $.get("../../Controllers/usuarios.controller.php?op=" + this.Ruta, (res) => {
       res = JSON.parse(res);
       $.each(res, (index, valor) => {
         var fondo;
@@ -61,7 +61,7 @@ class Usuarios_Model {
     var dato = new FormData();
     dato = this.Rol;
     $.ajax({
-      url: "../../Controllers/usuario.controller.php?op=insertar",
+      url: "../../Controllers/usuarios.controller.php?op=insertar",
       type: "POST",
       data: dato,
       contentType: false,
@@ -80,10 +80,10 @@ class Usuarios_Model {
   }
 
   cedula_repetida() {
-    var Cedula = this.Cedula;
+    var cedula = this.cedula;
     $.post(
-      "../../Controllers/usuario.controller.php?op=cedula_repetida",
-      { Cedula: Cedula },
+      "../../Controllers/usuarios.controller.php?op=cedula_repetida",
+      { cedula: cedula },
       (res) => {
         res = JSON.parse(res);
         if (parseInt(res.cedula_repetida) > 0) {
@@ -101,10 +101,10 @@ class Usuarios_Model {
   }
 
   verifica_correo() {
-    var Correo = this.Correo;
+    var correo = this.correo;
     $.post(
-      "../../Controllers/usuario.controller.php?op=verifica_correo",
-      { Correo: Correo },
+      "../../Controllers/usuarios.controller.php?op=verifica_correo",
+      { correo: correo },
       (res) => {
         res = JSON.parse(res);
         if (parseInt(res.cedula_repetida) > 0) {
@@ -124,19 +124,19 @@ class Usuarios_Model {
   uno() {
     var UsuarioId = this.UsuarioId;
     $.post(
-      "../../Controllers/usuario.controller.php?op=uno",
+      "../../Controllers/usuarios.controller.php?op=uno",
       { UsuarioId: UsuarioId },
       (res) => {
         console.log(res);
         res = JSON.parse(res);
         $("#UsuarioId").val(res.UsuarioId);
-        $("#Cedula").val(res.Cedula);
+        $("#cedula").val(res.cedula);
         $("#Nombres").val(res.Nombres);
         $("#Apellidos").val(res.Apellidos);
         $("#Telefono").val(res.Telefono);
-        $("#Correo").val(res.Correo);
-        $("#Contrasenia").val(res.Contrasenia);
-        $("#Contrasenia2").val(res.Contrasenia);
+        $("#correo").val(res.correo);
+        $("#contrasenia").val(res.contrasenia);
+        $("#contrasenia2").val(res.contrasenia);
 
         document.getElementById("Rol").value = res.Rol; //asiganr al select el valor
       }
@@ -148,7 +148,7 @@ class Usuarios_Model {
     var dato = new FormData();
     dato = this.Rol;
     $.ajax({
-      url: "../../Controllers/usuario.controller.php?op=actualizar",
+      url: "../../Controllers/usuarios.controller.php?op=actualizar",
       type: "POST",
       data: dato,
       contentType: false,
@@ -180,7 +180,7 @@ class Usuarios_Model {
     }).then((result) => {
       if (result.isConfirmed) {
         $.post(
-          "../../Controllers/usuario.controller.php?op=eliminar",
+          "../../Controllers/usuarios.controller.php?op=eliminar",
           { UsuarioId: UsuarioId },
           (res) => {
             console.log(res);
@@ -201,13 +201,13 @@ class Usuarios_Model {
   }
 
   limpia_Cajas() {
-    document.getElementById("Cedula").value = "";
+    document.getElementById("cedula").value = "";
     document.getElementById("Nombres").value = "";
     document.getElementById("Apellidos").value = "";
     document.getElementById("Telefono").value = "";
-    document.getElementById("Correo").value = "";
-    document.getElementById("Contrasenia").value = "";
-    document.getElementById("Contrasenia2").value = "";
+    document.getElementById("correo").value = "";
+    document.getElementById("contrasenia").value = "";
+    document.getElementById("contrasenia2").value = "";
     $("#UsuarioId").val("");
 
     $("#Modal_usuario").modal("hide");
