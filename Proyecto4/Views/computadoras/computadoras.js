@@ -94,8 +94,8 @@ function init() {
   
   var eliminar = (computadoraId) => {
     Swal.fire({
-      title: "computadora",
-      text: "Esta seguro de eliminar la lavadora",
+      title: "computadoras",
+      text: "Esta seguro de eliminar la computadora",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#d33",
@@ -121,7 +121,40 @@ function init() {
   
     impia_Cajas();
   };
-  
+  // ...
+
+var actualizar = (e) => {
+  e.preventDefault();
+  var dato = new FormData($("#frm_computadoras")[0]);
+  var ruta = "";
+  var computadoraId = document.getElementById("computadoraId").value;
+  if (computadoraId > 0) {
+      ruta = "../../Controllers/computadoras.controller.php?op=actualizar";
+      $.ajax({
+          url: ruta,
+          type: "POST",
+          data: dato,
+          contentType: false,
+          processData: false,
+          success: function (res) {
+              console.log(res)
+              res = JSON.parse(res);
+              if (res == "ok") {
+                  Swal.fire("computadoras", "Actualizada con éxito", "success");
+                  todos();
+                  limpia_Cajas();
+              } else {
+                  Swal.fire("computadoras", "Error al actualizar, intente más tarde", "error");
+              }
+          },
+      });
+  } else {
+      // Manejar el caso cuando no se selecciona ninguna computadora para actualizar.
+      Swal.fire("computadoras", "Seleccione una computadora para actualizar", "warning");
+  }
+};
+
+
   var limpia_Cajas = () => {
       document.getElementById("computadoraId").value = "";
       document.getElementById("tipocomputadora").value = "";

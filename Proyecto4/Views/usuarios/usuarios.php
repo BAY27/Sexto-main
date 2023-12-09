@@ -1,7 +1,6 @@
-<?php require_once('../html/head2.php') ?>
+<?php require_once('../html/head2.php'); ?>
 
 <div class="row">
-
     <div class="col-lg-8 d-flex align-items-stretch">
         <div class="card w-100">
             <div class="card-body p-4">
@@ -31,9 +30,7 @@
                                 </th>
                             </tr>
                         </thead>
-                        <tbody id="tabla_usuarios">
-
-                        </tbody>
+                        <tbody id="tabla_usuarios"></tbody>
                     </table>
                 </div>
             </div>
@@ -41,12 +38,6 @@
     </div>
 </div>
 
-<!-- Ventana Modal-->
-
-<!-- Button trigger modal -->
-
-
-<!-- Modal -->
 <div class="modal fade" id="Modal_usuario" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -56,59 +47,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-
-                    <input type="hidden" name="UsuarioId" id="UsuarioId">
-
-
-                    <div class="form-group">
-                        <label for="Cédula">Cédula</label>
-                        <input type="text" onfocusout="algoritmo_cedula();cedula_repetida();" required class="form-control" id="cedula" name="cedula" placeholder="cedula">
-                        <div class="alert alert-danger d-none" role="alert" id="errorCedula">
-                        </div>
-                        <div class="alert alert-danger d-none" role="alert" id="CedulaRepetida">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="nombre">Nombres</label>
-                        <input type="text" required class="form-control" id="Nombres" name="Nombres" placeholder="Nombres">
-                    </div>
-                    <div class="form-group">
-                        <label for="Apellidos">Apellidos</label>
-                        <input type="text" required class="form-control" id="Apellidos" name="Apellidos" placeholder="Apellidos">
-                    </div>
-                    <div class="form-group">
-                        <label for="Telefono">Teléfono</label>
-                        <input type="text" required class="form-control" id="Telefono" name="Telefono" placeholder="Telefono">
-                    </div>
-                    <div class="form-group">
-                        <label for="Rol">Rol</label>
-                        <select name="Rol" id="Rol" class="form-control">
-                            <option value="Administrador">Administrador</option>
-                            <option value="Vendedor">Vendedor</option>
-                            <option value="Cliente">Cliente</option>
-                            <option value="Gerente">Gerente</option>
-                            <option value="Cajero">Cajero</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="correo">Correo</label>
-                        <input type="text" required onfocusout="verifica_correo()" class="form-control" id="correo" name="correo" placeholder="correo">
-                        <div class="alert alert-danger d-none" role="alert" id="CorreoRepetido">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="contrasenia">Contraseña</label>
-                        <input type="password" required onfocusout="verifica_contrasenias()" class="form-control" id="contrasenia" name="contrasenia" placeholder="contrasenia">
-                        <div class="alert alert-danger d-none" role="alert" id="errorContrasenia">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="nombre">Repita su contraseña</label>
-                        <input type="password" required class="form-control" onfocusout="verifica_contrasenias()"  id="contrasenia2" placeholder="contrasenia2">
-                        <div class="alert alert-danger d-none" role="alert" id="errorContrasenia">
-                        </div>
-                    </div>
-
+                    <!-- ... Código del formulario ... -->
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Grabar</button>
@@ -119,7 +58,7 @@
     </div>
 </div>
 
-<?php require_once('../html/script2.php') ?>
+<?php require_once('../html/script2.php'); ?>
 
 <script src="usuarios.controller.js"></script>
 <script src="usuarios.model.js"></script>

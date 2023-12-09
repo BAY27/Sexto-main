@@ -1,15 +1,5 @@
 class Usuarios_Model {
-  constructor(
-    UsuarioId,
-    cedula,
-    Nombres,
-    Apellidos,
-    Telefono,
-    correo,
-    contrasenia,
-    Rol,
-    Ruta
-  ) {
+  constructor(UsuarioId, cedula, Nombres, Apellidos, Telefono, correo, contrasenia, Rol, Ruta) {
     this.UsuarioId = UsuarioId;
     this.cedula = cedula;
     this.Nombres = Nombres;
@@ -20,46 +10,34 @@ class Usuarios_Model {
     this.Rol = Rol;
     this.Ruta = Ruta;
   }
+
   todos() {
-    var html = "";
-    $.get("../../Controllers/usuarios.controller.php?op=" + this.Ruta, (res) => {
+    $.get(`../../Controllers/usuarios.controller.php?op=${this.Ruta}`, (res) => {
       res = JSON.parse(res);
-      $.each(res, (index, valor) => {
-        var fondo;
-        if (valor.Rol == "Administrador") fondo = "bg-primary";
-        else if (valor.Rol == "Vendedor") fondo = "bg-success";
-        else if (valor.Rol == "Cliente") fondo = "bg-warning";
-        else if (valor.Rol == "Gerente") fondo = "bg-danger";
-        else if (valor.Rol == "Cajero") fondo = "bg-info";
+      let html = "";
+      res.forEach((valor, index) => {
+        const fondo = getFondoColor(valor.Rol);
         html += `<tr>
-                <td>${index + 1}</td>
-                <td>${valor.Nombres}</td>
-                <td>${valor.Apellidos}</td>
-                <td><div class="d-flex align-items-center gap-2">
-                <span class="badge ${fondo} rounded-3 fw-semibold">${
-          valor.Rol
-        }</span>
-            </div></td>
-            <td>
-            <button class='btn btn-success' onclick='editar(${
-              valor.UsuarioId
-            })'>Editar</button>
-            <button class='btn btn-danger' onclick='eliminar(${
-              valor.UsuarioId
-            })'>Eliminar</button>
-            <button class='btn btn-info' onclick='ver(${
-              valor.UsuarioId
-            })'>Ver</button>
-            </td></tr>
-                `;
+          <td>${index + 1}</td>
+          <td>${valor.Nombres}</td>
+          <td>${valor.Apellidos}</td>
+          <td><div class="d-flex align-items-center gap-2">
+            <span class="badge ${fondo} rounded-3 fw-semibold">${valor.Rol}</span>
+          </div></td>
+          <td>
+            <button class='btn btn-success' onclick='editar(${valor.UsuarioId})'>Editar</button>
+            <button class='btn btn-danger' onclick='eliminar(${valor.UsuarioId})'>Eliminar</button>
+            <button class='btn btn-info' onclick='ver(${valor.UsuarioId})'>Ver</button>
+          </td>
+        </tr>`;
       });
       $("#tabla_usuarios").html(html);
     });
   }
 
   insertar() {
-    var dato = new FormData();
-    dato = this.Rol;
+    const dato = new FormData();
+    dato.append("Rol", this.Rol);
     $.ajax({
       url: "../../Controllers/usuarios.controller.php?op=insertar",
       type: "POST",
@@ -80,54 +58,39 @@ class Usuarios_Model {
   }
 
   cedula_repetida() {
-    var cedula = this.cedula;
+    const cedula = this.cedula;
     $.post(
       "../../Controllers/usuarios.controller.php?op=cedula_repetida",
       { cedula: cedula },
       (res) => {
         res = JSON.parse(res);
-        if (parseInt(res.cedula_repetida) > 0) {
-          $("#CedulaRepetida").removeClass("d-none");
-          $("#CedulaRepetida").html(
-            "La cédua ingresa, ya exite en la base de datos"
-          );
-          $("button").prop("disabled", true);
-        } else {
-          $("#CedulaRepetida").addClass("d-none");
-          $("button").prop("disabled", false);
-        }
+        const cedulaRepetida = parseInt(res.cedula_repetida);
+        $("#CedulaRepetida").toggleClass("d-none", cedulaRepetida <= 0);
+        $("button").prop("disabled", cedulaRepetida > 0);
       }
     );
   }
 
   verifica_correo() {
-    var correo = this.correo;
+    const correo = this.correo;
     $.post(
       "../../Controllers/usuarios.controller.php?op=verifica_correo",
       { correo: correo },
       (res) => {
         res = JSON.parse(res);
-        if (parseInt(res.cedula_repetida) > 0) {
-          $("#CorreoRepetido").removeClass("d-none");
-          $("#CorreoRepetido").html(
-            "El correo ingresado, ya exite en la base de datos"
-          );
-          $("button").prop("disabled", true);
-        } else {
-          $("#CorreoRepetido").addClass("d-none");
-          $("button").prop("disabled", false);
-        }
+        const correoRepetido = parseInt(res.cedula_repetida);
+        $("#CorreoRepetido").toggleClass("d-none", correoRepetido <= 0);
+        $("button").prop("disabled", correoRepetido > 0);
       }
     );
   }
 
   uno() {
-    var UsuarioId = this.UsuarioId;
+    const UsuarioId = this.UsuarioId;
     $.post(
       "../../Controllers/usuarios.controller.php?op=uno",
       { UsuarioId: UsuarioId },
       (res) => {
-        console.log(res);
         res = JSON.parse(res);
         $("#UsuarioId").val(res.UsuarioId);
         $("#cedula").val(res.cedula);
@@ -137,16 +100,15 @@ class Usuarios_Model {
         $("#correo").val(res.correo);
         $("#contrasenia").val(res.contrasenia);
         $("#contrasenia2").val(res.contrasenia);
-
-        document.getElementById("Rol").value = res.Rol; //asiganr al select el valor
+        document.getElementById("Rol").value = res.Rol; //asignar al select el valor
       }
     );
     $("#Modal_usuario").modal("show");
   }
 
   editar() {
-    var dato = new FormData();
-    dato = this.Rol;
+    const dato = new FormData();
+    dato.append("Rol", this.Rol);
     $.ajax({
       url: "../../Controllers/usuarios.controller.php?op=actualizar",
       type: "POST",
@@ -167,8 +129,7 @@ class Usuarios_Model {
   }
 
   eliminar() {
-    var UsuarioId = this.UsuarioId;
-
+    const UsuarioId = this.UsuarioId;
     Swal.fire({
       title: "Usuarios",
       text: "Esta seguro de eliminar el usuario",
@@ -183,8 +144,6 @@ class Usuarios_Model {
           "../../Controllers/usuarios.controller.php?op=eliminar",
           { UsuarioId: UsuarioId },
           (res) => {
-            console.log(res);
-            
             res = JSON.parse(res);
             if (res === "ok") {
               Swal.fire("usuarios", "Usuario Eliminado", "success");
@@ -196,20 +155,29 @@ class Usuarios_Model {
         );
       }
     });
-
     this.limpia_Cajas();
   }
 
   limpia_Cajas() {
-    document.getElementById("cedula").value = "";
-    document.getElementById("Nombres").value = "";
-    document.getElementById("Apellidos").value = "";
-    document.getElementById("Telefono").value = "";
-    document.getElementById("correo").value = "";
-    document.getElementById("contrasenia").value = "";
-    document.getElementById("contrasenia2").value = "";
-    $("#UsuarioId").val("");
-
+    const ids = ["cedula", "Nombres", "Apellidos", "Telefono", "correo", "contrasenia", "contrasenia2", "UsuarioId"];
+    ids.forEach((id) => (document.getElementById(id).value = ""));
     $("#Modal_usuario").modal("hide");
+  }
+}
+
+function getFondoColor(rol) {
+  switch (rol) {
+    case "Administrador":
+      return "bg-primary";
+    case "Vendedor":
+      return "bg-success";
+    case "Cliente":
+      return "bg-warning";
+    case "Gerente":
+      return "bg-danger";
+    case "Cajero":
+      return "bg-info";
+    default:
+      return "";
   }
 }
